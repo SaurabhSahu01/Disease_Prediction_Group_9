@@ -197,3 +197,70 @@ plt.figure(figsize=(15,10))
 sns.heatmap(cmKNN, annot=True)
 plt.title("Confusion Matrix for KNN on Test Data")
 plt.show()
+
+# Desicion Tree 
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+
+d = pd.read_csv("Training.csv")
+# d.describe()
+
+d.drop('Unnamed: 133', axis=1, inplace=True)
+# d.columns
+
+#splitting the data frame
+a = d.drop('prognosis', axis=1) #dropping the prognosis column
+b = d['prognosis'] #just the prognosis column
+x_train, x_test, y_train, y_test = train_test_split(a, b, test_size=0.5, random_state=42)
+#half the data for testing, half for training : splitting this way helps evaluate the performance, and avoids overfitting
+
+tree = DecisionTreeClassifier()
+visual_tree = DecisionTreeClassifier(max_depth = 10, random_state = 42)
+#setting max depth to 10 to visualize this sample tree
+tree.fit(x_train, y_train)
+visual_tree.fit(x_train, y_train)
+#creating the tree, fitting the training data
+
+#visualizing the visual_tree with max depth = 10
+
+from sklearn.tree import export_graphviz
+import graphviz
+
+dot_data = export_graphviz(visual_tree, out_file=None, 
+                           feature_names=a.columns,  
+                           class_names=b.unique(),  
+                           filled=True, rounded=True,  
+                           special_characters=True)
+
+pred = tree.predict(x_test)
+acc = tree.score(x_test, y_test)
+
+print("accuracy = {:.2f}%".format(acc*100))
+
+# Testing
+new_data = pd.read_csv("/content/Testing.csv")
+
+# Separate the features and target variable from the new dataset
+X_new = new_data.drop('prognosis', axis=1)
+y_new = new_data['prognosis']
+
+y_pred = tree.predict(X_new)
+
+accuracy = accuracy_score(y_new, y_pred)
+
+cmDecisionTree = confusion_matrix(y_new, y_pred)
+
+plt.figure(figsize=(20, 10))
+
+sns.heatmap(cmDecisionTree, annot=True, cmap="YlGnBu" ,fmt='g')
+
+print("Accuracy on new dataset: {:.2f}%".format(accuracy * 100))
+plt.xlabel('Predicted labels')
+plt.ylabel('True labels')
+plt.title('Confusion Matrix of Decision Tree')
+
+plt.show()
