@@ -1,0 +1,14 @@
+Group Number : 9
+
+Project Title : Disease Prediction Using Machine Learning
+
+Group Members :
+
+	1.) Christa Elsa Linu ( 20/11/EC/015 ) - christaelsalinu@gmail.com
+	2.) Prakhar Sharma ( 20/11/EC/028 ) - sharmaprakhar475@gmail.com
+	3.) Saurabh Kumar ( 20/11/EC/032 ) - saurabhsahu794@gmail.com
+	4.) Shubham Tanwar ( 20/11/EC/051 ) - tanwarshubham29@gmail.com
+	5.) Vinay Kumar - ( 20/11/EC/022 ) - vinaykumarbadbaria2001@gmail.com
+	6.) Vishisht Makkar - ( 20/11/EC/047 ) - vishisht.makkar@gmail.com
+
+GitHub Repo Link : https://github.com/SaurabhSahu01/Disease_Prediction_Group_9.git
